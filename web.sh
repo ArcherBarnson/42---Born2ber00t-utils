@@ -3,8 +3,12 @@ GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 NC='\033[0;37m'
 WH='\033[1;37m'
-systemctl start lighttpd && systemctl enable lighttpd && \
-systemctl status lighttpd && sleep 3 && \
+DB_NAME=""
+USERNAME=""
+PASSWORD=""
+LOCALHOST=""
+#systemctl start lighttpd && systemctl enable lighttpd && \
+#systemctl status lighttpd && sleep 3 && \
 echo "${GREEN}DONE0${NC}." && \
 sed -i "/listen = /run/php/php7.4-fpm.sock/c\dlisten = 127.0.0.1:9000" \
 /etc/php/7.4/fpm/pool.d/www.conf && \
@@ -15,14 +19,17 @@ echo "${GREEN}DONE2${NC}." && \
 sed -i "/\"socket\"/c\d\t\t\"port\" => 9000" \
 /etc/lighttpd/conf-available/15-fastcgi-php.conf && \
 echo "${GREEN}DONE3${NC}." && \
-lighty-enable-mod fastcgi && lighty-enable-mod fastcgi-php && \
-systemctl restart lighttpd && systemctl restart php7.4-fpm && \
+#lighty-enable-mod fastcgi && lighty-enable-mod fastcgi-php && \
+#systemctl restart lighttpd && systemctl restart php7.4-fpm && \
 echo "${GREEN}DONE${NC}." && \
-echo "bruh\n" && \
-read DB_NAME?"Your DB: " && \
-read USERNAME?"Your username: " && \
-read PASSWORD?"Your password: " && \
-read LOCALHOST?"Your hostname: " && \
+echo "Your DB: " && \
+read DB_NAME && \
+echo "Your username: " && \
+read USERNAME && \
+echo "Your password: " && \
+read PASSWORD && \
+echo "Your hostname: " && \
+read LOCALHOST && \
 sed -i "/define( 'DB_NAME', 'database_name_here' );/c\define( 'DB_NAME', '$DB_NAME' );" \
 /var/www/html/wordpress/wp-config.php && \
 sed -i "/define( 'DB_USER', 'username_here' );/c\define( 'DB_USER', '$USERNAME' );" \

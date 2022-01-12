@@ -37,7 +37,7 @@ printf "		UFW SETUP & SERVICES INIT\n" && \
 printf "\n----------------------------------------------------------------------------------------------\n" && \
 sleep 1 && \
 printf "${CYAN}Activating the firewall and opening ports...\nSetting up hostname...${NC}\n" && \
-ufw enable && ufw allow 22 && ufw allow 4242 && sytemctl start dbus.service dbus.socket && \
+ufw enable && ufw allow 22 && ufw allow 4242 && systemctl start dbus.service dbus.socket && \
 hostnamectl set-hostname bgrulois42 && \
 printf "${CYAN}Restarting servives...${NC}\n" && \
 printf "${GREEN}Done!${NC}\n\n" && \
