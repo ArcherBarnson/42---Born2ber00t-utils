@@ -13,6 +13,12 @@ sed -i -e "s/\(#Port \).*/\Port 4242/" \
 printf "${GREEN}Done!${NC}\n\n" && \
 sleep 1 && \
 printf "\n${WH}----------------------------------------------------------------------------------------------\n" && \
+printf "		GROUPS AND USERS INITIALIZATION\n" && \
+printf "\n----------------------------------------------------------------------------------------------\n${NC}" && \
+sleep 1 && \
+printf "${CYAN}Creating the 'user42' group...${NC}\n" && \
+groupadd user42 && usermod -a -G user42 bgrulois && \
+printf "\n${WH}----------------------------------------------------------------------------------------------\n" && \
 printf "		PASSWORD POLICY\n" && \
 printf "\n----------------------------------------------------------------------------------------------\n${NC}" && \
 sleep 1 && \
@@ -37,12 +43,18 @@ printf "		UFW SETUP & SERVICES INIT\n" && \
 printf "\n----------------------------------------------------------------------------------------------\n" && \
 sleep 1 && \
 printf "${CYAN}Activating the firewall and opening ports...\nSetting up hostname...${NC}\n" && \
-ufw enable && ufw allow 22 && ufw allow 4242 && systemctl start dbus.service dbus.socket && \
+ufw enable && ufw allow 4242 && ufw allow 9000 && \
+systemctl start dbus.service dbus.socket && \
 hostnamectl set-hostname bgrulois42 && \
-printf "${CYAN}Restarting servives...${NC}\n" && \
+#remplacer un truc par l'hostname dans /etc/hosts
+printf "${CYAN}Restarting services...${NC}\n" && \
 printf "${GREEN}Done!${NC}\n\n" && \
 systemctl restart ssh && systemctl start lighttpd && systemctl enable lighttpd && \
 hostnamectl status && ufw status verbose && systemctl status ssh && \
+printf "\n${GREEN}----------------------------------------------------------------------------------------------\n" && \
+printf "		 ACTIVATING CRONTAB\n" && \
+printf "\n----------------------------------------------------------------------------------------------${NC}\n\n\n" && \
+#crontab #?????
 printf "\n${GREEN}----------------------------------------------------------------------------------------------\n" && \
 printf "		AUTOCONFIG COMPLETE :D\n" && \
 printf "\n----------------------------------------------------------------------------------------------${NC}\n\n\n" && \

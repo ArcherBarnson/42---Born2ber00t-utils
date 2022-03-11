@@ -16,7 +16,7 @@ TCP=$(netstat -tan | grep -o ESTABLISHED | wc -l)
 USERS=$(who | wc -l)
 IPV4=$(hostname -I)
 MAC=$(cat /sys/class/net/enp0s3/address)
-SUDO=$(tail /var/log/auth.log | wc -l)
+SUDO=$(tail /var/log/auth.log | grep sudo | wc -l)
 wall "
 #Architecture:$ARCHITECTURE
 #CPU Physical : $CPU_PHY
